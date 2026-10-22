@@ -1,4 +1,4 @@
-import Tool from './tool'
+import Tool from './tool/index.vue'
 import IndexField from './field/Index'
 import DetailField from './field/Detail'
 import FormField from './field/Form'

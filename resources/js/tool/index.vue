@@ -45,11 +45,7 @@ export default {
   },
 
   data() {
-    const config = window.Nova.config.novaMediaLibrary
-    if (!config) {
-      throw new Error('[nml] novaMediaLibrary config is undefined - tool boot()/provideToScript not running')
-    }
-    window.__nmlDebug = { hasConfig: true, store: config.store, types: config.types }
+    let config = window.Nova.config.novaMediaLibrary
     config.display = 'list' === localStorage.getItem('nml-display') ? 'list' : 'gallery'
 
     return {
@@ -161,15 +157,6 @@ export default {
     this.get()
 
     if (!this.field && wheel) document.addEventListener(wheel, this.scroller)
-  },
-
-  mounted() {
-    window.__nmlDebug = {
-      ...window.__nmlDebug,
-      mounted: true,
-      itemsTotal: this.items.total,
-      itemsCount: this.items.array.length,
-    }
   },
 
   beforeUnmount() {

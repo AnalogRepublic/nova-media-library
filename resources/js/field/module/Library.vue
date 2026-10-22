@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import MediaLibraryTool from '../../tool'
+import MediaLibraryTool from '../../tool/index.vue'
 
 export default {
   props: ['field'],
