@@ -17,6 +17,8 @@ class NovaMediaLibrary extends Tool
      */
     public function boot()
     {
+	    \Log::info('[nml] boot called', ['config' => $this->config()]);
+
 	    Nova::script('nova-media-library', __DIR__.'/../dist/js/tool.js');
 	    Nova::style('nova-media-library', __DIR__.'/../dist/css/tool.css');
 
