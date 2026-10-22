@@ -1,31 +1,39 @@
 <template>
-  <div class="flex border-b border-40">
+  <PanelItem :index="index" :field="field">
+    <template #value>
+      <div class="nml-field-form">
+        <template v-if="!field.value">&mdash;</template>
 
-    <slot>
-      <div class="w-1/4 py-4 font-normal text-80">
-        {{ field.indexName }}
-      </div>
-    </slot>
-
-    <slot name="value">
-      <div class="nml-field-form w-3/4 py-4">
-
-        <template v-if="!field.value">—</template>
-
-        <span class="cursor-pointer dim text-primary font-bold"
-              v-else-if="isHidden"
-              @click="isHidden = false"
+        <span
+          class="cursor-pointer dim text-primary font-bold"
+          v-else-if="isHidden"
+          @click="isHidden = false"
         >{{ __('Show') }}</span>
 
         <template v-else-if="!field.nmlJsCallback && !field.nmlTrix">
           <nmlArray v-if="field.nmlArray" :field="field" />
           <nmlFile v-else :field="field" />
         </template>
-
       </div>
-    </slot>
-
-  </div>
+    </template>
+  </PanelItem>
 </template>
 
-<script src="./script.js"></script>
+<script>
+import nmlArray from '../module/Array'
+import nmlCallback from '../module/Callback'
+import nmlFile from '../module/File'
+import nmlTrix from '../module/Trix'
+
+export default {
+  props: ['index', 'resource', 'resourceName', 'resourceId', 'field'],
+
+  components: { nmlArray, nmlFile, nmlCallback, nmlTrix },
+
+  data() {
+    return {
+      isHidden: this.field.nmlHidden === true,
+    }
+  },
+}
+</script>
