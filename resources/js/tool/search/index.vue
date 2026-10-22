@@ -1,9 +1,9 @@
 <template>
-  <div class="flex flex-wrap mb-6 select-none">
-    <div class="relative mr-4 max-w-full">
-      <Icon type="search" class="absolute search-icon-center ml-3 text-70" />
+  <div class="flex flex-wrap items-center gap-4 mb-6 select-none">
+    <div class="relative">
+      <Icon type="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
       <input
-        class="form-control form-input w-search pl-search shadow-md w-full"
+        class="rounded-md border border-gray-300 bg-white shadow-sm pl-9 pr-3 py-2 text-sm w-full focus:border-primary-500 focus:ring-0"
         type="search"
         :placeholder="__('Search by name')"
         v-model="$parent.filter.title"
@@ -12,7 +12,7 @@
     </div>
 
     <input
-      class="form-control form-input shadow-md max-w-full mr-4"
+      class="rounded-md border border-gray-300 bg-white shadow-sm px-3 py-2 text-sm w-44"
       type="date"
       :placeholder="__('Upload From')"
       v-model="$parent.filter.from"
@@ -20,7 +20,7 @@
     />
 
     <input
-      class="form-control form-input shadow-md max-w-full"
+      class="rounded-md border border-gray-300 bg-white shadow-sm px-3 py-2 text-sm w-44"
       type="date"
       :placeholder="__('Upload To')"
       v-model="$parent.filter.to"
@@ -29,7 +29,7 @@
 
     <div
       :title="__('Change Display Type')"
-      class="nml-display bg-white shadow-md rounded-lg cursor-pointer ml-auto mr-4 active:shadow-outline"
+      class="nml-display bg-white shadow-md rounded-lg cursor-pointer ml-auto"
     >
       <svg v-if="'gallery' === $parent.config.display" @click="display('list')" style="padding:8px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
         <path d="M3 1h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2H3c-1.1045695 0-2-.8954305-2-2V3c0-1.1045695.8954305-2 2-2zm0 2v4h4V3H3zm10-2h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2h-4c-1.1045695 0-2-.8954305-2-2V3c0-1.1045695.8954305-2 2-2zm0 2v4h4V3h-4zM3 11h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2H3c-1.1045695 0-2-.8954305-2-2v-4c0-1.1045695.8954305-2 2-2zm0 2v4h4v-4H3zm10-2h4c1.1045695 0 2 .8954305 2 2v4c0 1.1045695-.8954305 2-2 2h-4c-1.1045695 0-2-.8954305-2-2v-4c0-1.1045695.8954305-2 2-2zm0 2v4h4v-4h-4z"></path>
@@ -40,7 +40,7 @@
     </div>
 
     <select
-      class="shadow-md block border-0 cursor-pointer form-control form-select"
+      class="rounded-md border border-gray-300 bg-white shadow-sm py-2 px-3 text-sm cursor-pointer"
       v-if="types.length > 1"
       v-model="$parent.filter.type"
       @change="$parent.doSearch()"

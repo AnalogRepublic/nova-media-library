@@ -210,30 +210,40 @@ body.overflow-hidden #nova
 .btn-default
   display: inline-flex
   align-items: center
+  justify-content: center
   border-radius: 0.375rem
   font-weight: 600
-  line-height: 1.25
-  padding: 0.5rem 0.875rem
+  font-size: 0.875rem
+  line-height: 1.25rem
+  padding: 0.5rem 1rem
   border: 1px solid transparent
   cursor: pointer
   text-decoration: none
   color: #fff
+  transition: background-color 150ms ease
 
-.btn-primary
-  background-color: rgba(var(--colors-primary-500), 1)
-.btn-danger
-  background-color: rgba(var(--colors-red-500), 1)
-.btn-success
-  background-color: rgba(var(--colors-green-500), 1)
-
+.btn-primary,
 .bg-primary
   background-color: rgba(var(--colors-primary-500), 1)
+  &:hover
+    background-color: rgba(var(--colors-primary-400), 1)
+
+.btn-danger,
 .bg-danger
   background-color: rgba(var(--colors-red-500), 1)
+  &:hover
+    background-color: rgba(var(--colors-red-400), 1)
+
+.btn-success,
 .bg-success
-  background-color: rgba(var(--colors-green-500), 1)
+  background-color: rgba(var(--colors-emerald-500), 1)
+  &:hover
+    background-color: rgba(var(--colors-emerald-400), 1)
+
 .bg-90
   background-color: rgba(var(--colors-slate-500), 1)
+  &:hover
+    background-color: rgba(var(--colors-slate-400), 1)
 
 .text-primary
   color: rgba(var(--colors-primary-500), 1)

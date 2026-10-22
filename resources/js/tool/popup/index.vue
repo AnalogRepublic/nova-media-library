@@ -28,7 +28,7 @@
       <div class="flex border-b border-40">
         <div class="w-1/4 py-4 font-bold text-80 leading-36">{{ __('Title') }}</div>
         <div class="w-3/4 py-4">
-          <input class="form-control form-input w-full shadow-md" v-model="$parent.item.title">
+          <input class="rounded-md border border-gray-300 bg-white shadow-sm px-3 py-2 text-sm w-full focus:border-primary-500 focus:ring-0" v-model="$parent.item.title">
         </div>
       </div>
 
@@ -46,7 +46,7 @@
       <div class="flex border-b border-40" v-if="'folders' === $parent.config.store">
         <div class="w-1/4 py-4 font-bold text-80 leading-36">{{ __('Move to folder') }}</div>
         <div class="w-3/4 py-4">
-          <select v-model="folder" class="shadow-md block border-0 cursor-pointer form-control form-select w-full">
+          <select v-model="folder" class="rounded-md border border-gray-300 bg-white shadow-sm py-2 px-3 text-sm cursor-pointer w-full">
             <option :value="null"></option>
             <option v-for="key in folders" :value="key" :key="key">{{ key }}</option>
           </select>

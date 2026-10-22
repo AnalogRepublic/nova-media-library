@@ -13,7 +13,7 @@
       <div class="flex border-b border-50 leading-loose">
         <div class="py-2 px-4">{{ __('Rotate') }}</div>
         <div class="ml-auto py-2 px-4 font-bold text-90 text-right">
-          <input class="form-control-sm form-input shadow-md" type="number" min="0" max="360" v-model="info.rotate" @input="rotate" />
+          <input class="rounded-md border border-gray-300 bg-white shadow-sm px-3 py-2 text-sm w-24" type="number" min="0" max="360" v-model="info.rotate" @input="rotate" />
         </div>
       </div>
 

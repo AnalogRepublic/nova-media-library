@@ -36,7 +36,7 @@
     <label class="btn-default bg-90 text-white text-center cursor-pointer shadow-md max-w-full ml-auto">
       <input
         id="nml_upload"
-        class="form-file-input"
+        class="hidden"
         type="file"
         multiple
         :accept="$parent.config.accept"
