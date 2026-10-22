@@ -45,7 +45,7 @@ export default {
   },
 
   data() {
-    console.log('[nml:tool] window.Nova.config.novaMediaLibrary =', window.Nova.config.novaMediaLibrary)
+    console.error('[nml:tool] window.Nova.config.novaMediaLibrary =', window.Nova.config.novaMediaLibrary)
     let config = window.Nova.config.novaMediaLibrary
     config.display = 'list' === localStorage.getItem('nml-display') ? 'list' : 'gallery'
 
@@ -161,7 +161,7 @@ export default {
   },
 
   mounted() {
-    console.log('[nml:tool] mounted, items =', this.items)
+    console.error('[nml:tool] mounted, items =', this.items)
   },
 
   beforeUnmount() {
