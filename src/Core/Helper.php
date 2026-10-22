@@ -14,16 +14,20 @@ class Helper {
 
 	static function directories()
 	{
-		$len = strlen(substr(self::folder(), 1));
-		$array = [];
+		try {
+			$len = strlen(substr(self::folder(), 1));
+			$array = [];
 
-		foreach (self::storage()->allDirectories(config('nova-media-library.folder')) as $item) {
-			if ( 'nml_temp' == $item ) continue;
-			$path = str_replace('/', '.', substr($item, $len));
-			if ( $path ) data_set($array, $path, 0);
+			foreach (self::storage()->allDirectories(config('nova-media-library.folder')) as $item) {
+				if ( 'nml_temp' == $item ) continue;
+				$path = str_replace('/', '.', substr($item, $len));
+				if ( $path ) data_set($array, $path, 0);
+			}
+
+			return $array;
+		} catch (\Throwable $e) {
+			return [];
 		}
-
-		return $array;
 	}
 
 	static function replace($str)
