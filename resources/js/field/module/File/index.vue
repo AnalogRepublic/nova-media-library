@@ -50,6 +50,7 @@ export default {
   components: { Library },
 
   data() {
+    console.log('[nml:file] this.field =', this.field)
     return {
       popup: false,
       item: this.field.value,

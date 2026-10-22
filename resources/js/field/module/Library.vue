@@ -24,6 +24,12 @@ export default {
     },
   },
 
+  created() {
+    console.log('[nml:library] this.field =', this.field)
+    console.log('[nml:library] this.$props.field =', this.$props.field)
+    console.log('[nml:library] this.$attrs.field =', this.$attrs.field)
+  },
+
   mounted() {
     document.body.classList.add('overflow-hidden')
   },
