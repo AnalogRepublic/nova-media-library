@@ -41,9 +41,7 @@
       </a>
     </div>
 
-    <transition name="fade" mode="out-in">
-      <Library v-if="popup" isArray :field="field" />
-    </transition>
+    <Library v-if="popup" isArray :field="field" />
   </div>
 </template>
 

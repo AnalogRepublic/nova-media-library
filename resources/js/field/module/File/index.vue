@@ -34,9 +34,7 @@
       </a>
     </div>
 
-    <transition name="fade" mode="out-in">
-      <Library v-if="popup" :field="field" />
-    </transition>
+    <Library v-if="popup" :field="field" />
   </div>
 </template>
 

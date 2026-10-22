@@ -18,10 +18,10 @@ export default {
 
   components: { Library },
 
-  data() {
-    return {
-      types: Array.isArray(this.field.nmlTypes) ? this.field.nmlTypes : [],
-    }
+  computed: {
+    types() {
+      return this.field && Array.isArray(this.field.nmlTypes) ? this.field.nmlTypes : []
+    },
   },
 
   mounted() {
