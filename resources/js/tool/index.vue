@@ -45,8 +45,11 @@ export default {
   },
 
   data() {
-    console.error('[nml:tool] window.Nova.config.novaMediaLibrary =', window.Nova.config.novaMediaLibrary)
-    let config = window.Nova.config.novaMediaLibrary
+    const config = window.Nova.config.novaMediaLibrary
+    if (!config) {
+      throw new Error('[nml] novaMediaLibrary config is undefined - tool boot()/provideToScript not running')
+    }
+    window.__nmlDebug = { hasConfig: true, store: config.store, types: config.types }
     config.display = 'list' === localStorage.getItem('nml-display') ? 'list' : 'gallery'
 
     return {
@@ -161,7 +164,12 @@ export default {
   },
 
   mounted() {
-    console.error('[nml:tool] mounted, items =', this.items)
+    window.__nmlDebug = {
+      ...window.__nmlDebug,
+      mounted: true,
+      itemsTotal: this.items.total,
+      itemsCount: this.items.array.length,
+    }
   },
 
   beforeUnmount() {
