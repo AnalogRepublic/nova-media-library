@@ -18,13 +18,13 @@ Nova.booting((app, store) => {
     Nova.inertia('NovaMediaLibrary', Tool)
 })
 
-if ('object' === typeof Nova.config.novaMediaLibrary) {
-    if (Nova.config.novaMediaLibrary.store === 'folders') {
+if ('object' === typeof Nova.config('novaMediaLibrary')) {
+    if (Nova.config('novaMediaLibrary').store === 'folders') {
         Nova.request().get('/nova-vendor/nova-media-library/folders').then(r => {
-            Object.assign(Nova.config.novaMediaLibrary, { folders: r.data })
+            Object.assign(Nova.config('novaMediaLibrary'), { folders: r.data })
         })
     }
-    if ('object' === typeof Nova.config.novaMediaLibrary.lang) {
-        Object.assign(Nova.config.translations, Nova.config.novaMediaLibrary.lang)
+    if ('object' === typeof Nova.config('novaMediaLibrary').lang) {
+        Object.assign(Nova.config('translations'), Nova.config('novaMediaLibrary').lang)
     }
 }

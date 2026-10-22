@@ -45,7 +45,7 @@ export default {
   },
 
   data() {
-    let config = window.Nova.config.novaMediaLibrary
+    let config = window.Nova.config('novaMediaLibrary')
     config.display = 'list' === localStorage.getItem('nml-display') ? 'list' : 'gallery'
 
     return {
