@@ -43,7 +43,7 @@ class ToolServiceProvider extends ServiceProvider
             return;
         }
 
-        Nova::router(['nova', Authenticate::class, Authorize::class], 'nova-media-library')
+        Nova::router(['nova', Authenticate::class, Authorize::class], 'media-library')
                 ->group(__DIR__.'/../routes/inertia.php');
 
         Route::middleware(['nova', Authorize::class])
