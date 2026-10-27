@@ -3,6 +3,7 @@
 namespace ClassicO\NovaMediaLibrary\Core;
 
 use ClassicO\NovaMediaLibrary\API;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class Helper {
@@ -18,7 +19,15 @@ class Helper {
 			$len = strlen(substr(self::folder(), 1));
 			$array = [];
 
-			foreach (self::storage()->allDirectories(config('nova-media-library.folder')) as $item) {
+			$dirs = self::storage()->allDirectories(config('nova-media-library.folder'));
+			Log::info('[nova-media-library] directories listed', [
+				'disk' => config('nova-media-library.disk'),
+				'prefix' => config('nova-media-library.folder'),
+				'count' => count($dirs),
+				'directories' => array_slice($dirs, 0, 200),
+			]);
+
+			foreach ($dirs as $item) {
 				if ( 'nml_temp' == $item ) continue;
 				$path = str_replace('/', '.', substr($item, $len));
 				if ( $path ) data_set($array, $path, 0);
@@ -26,6 +35,13 @@ class Helper {
 
 			return $array;
 		} catch (\Throwable $e) {
+			Log::error('[nova-media-library] failed to list directories', [
+				'disk' => config('nova-media-library.disk'),
+				'prefix' => config('nova-media-library.folder'),
+				'exception' => get_class($e),
+				'message' => $e->getMessage(),
+			]);
+
 			return [];
 		}
 	}
