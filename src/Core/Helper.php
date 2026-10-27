@@ -29,7 +29,8 @@ class Helper {
 			// Folders that exist only through file keys (no placeholder object): take them from the DB
 			$fromDb = 0;
 			if ( 'folders' == config('nova-media-library.store') ) {
-				foreach (Model::query()->distinct()->pluck('folder') as $folder) {
+				$folders = Model::query()->distinct()->pluck('folder');
+				foreach ($folders as $folder) {
 					$path = trim((string)$folder, '/');
 					if ( '' === $path ) continue;
 					$paths[] = $path;
