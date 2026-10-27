@@ -2,6 +2,7 @@
 
 namespace ClassicO\NovaMediaLibrary\Core;
 
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -80,6 +81,13 @@ class Model extends \Illuminate\Database\Eloquent\Model {
 				if ( $title )
 					$query->where('title', 'LIKE', "%$title%");
 			});
+
+		Log::info('[nova-media-library] search query', [
+			'sql' => $data->toSql(),
+			'bindings' => $data->getBindings(),
+			'page' => $param['page'] ?? null,
+			'step' => $step,
+		]);
 
 		return [
 			'total' => (clone $data)->count(),
