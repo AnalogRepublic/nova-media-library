@@ -53,7 +53,9 @@ export default {
       this.folder.slice(1, -1).split('/').forEach(item => {
         if ('' !== item) keys = Object.assign({}, keys[item] || {})
       })
-      return Object.keys(keys)
+      let names = Object.keys(keys)
+      let title = (this.$parent.filter.title || '').trim().toLowerCase()
+      return title ? names.filter(name => name.toLowerCase().includes(title)) : names
     },
   },
 
