@@ -17,23 +17,47 @@ class Helper {
 	{
 		try {
 			$len = strlen(substr(self::folder(), 1));
-			$array = [];
+			$paths = [];
 
+			// Folders with a placeholder object in the bucket
 			$dirs = self::storage()->allDirectories(config('nova-media-library.folder'));
+			foreach ($dirs as $item) {
+				if ( 'nml_temp' == $item ) continue;
+				$paths[] = trim(substr($item, $len), '/');
+			}
+
+			// Folders that exist only through file keys (no placeholder object): take them from the DB
+			$fromDb = 0;
+			if ( 'folders' == config('nova-media-library.store') ) {
+				foreach (Model::query()->distinct()->pluck('folder') as $folder) {
+					$path = trim((string)$folder, '/');
+					if ( '' === $path ) continue;
+					$paths[] = $path;
+					$fromDb++;
+				}
+			}
+
 			Log::info('[nova-media-library] directories listed', [
 				'disk' => config('nova-media-library.disk'),
 				'prefix' => config('nova-media-library.folder'),
-				'count' => count($dirs),
+				's3_count' => count($dirs),
+				'db_count' => $fromDb,
 				'directories' => array_slice($dirs, 0, 200),
 			]);
 
-			foreach ($dirs as $item) {
-				if ( 'nml_temp' == $item ) continue;
-				$path = str_replace('/', '.', substr($item, $len));
-				if ( $path ) data_set($array, $path, 0);
+			$array = [];
+			foreach (array_unique($paths) as $path) {
+				if ( '' === $path ) continue;
+				$node = &$array;
+				foreach (explode('/', $path) as $segment) {
+					if ( '' === $segment ) continue;
+					if ( !isset($node[$segment]) or !is_array($node[$segment]) ) $node[$segment] = [];
+					$node = &$node[$segment];
+				}
+				unset($node);
 			}
 
-			return $array;
+			return self::leaves($array);
 		} catch (\Throwable $e) {
 			Log::error('[nova-media-library] failed to list directories', [
 				'disk' => config('nova-media-library.disk'),
@@ -44,6 +68,15 @@ class Helper {
 
 			return [];
 		}
+	}
+
+	// Leaf folders are `0` in the tree the frontend expects
+	private static function leaves(array $tree)
+	{
+		foreach ($tree as $key => $child)
+			$tree[$key] = $child ? self::leaves($child) : 0;
+
+		return $tree;
 	}
 
 	static function replace($str)
