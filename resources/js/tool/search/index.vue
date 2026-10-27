@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-wrap items-center gap-4 mb-6 select-none">
-    <div class="relative">
-      <Icon type="search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+    <div class="nml-search relative">
+      <Icon type="search" class="nml-search-icon text-slate-400" />
       <input
-        class="rounded-md border border-gray-300 bg-white shadow-sm pl-9 pr-3 py-2 text-sm w-full focus:border-primary-500 focus:ring-0"
+        class="rounded-md border border-gray-300 bg-white shadow-sm pr-3 py-2 text-sm w-full focus:border-primary-500 focus:ring-0"
         type="search"
         :placeholder="__('Search by name')"
         v-model="$parent.filter.title"

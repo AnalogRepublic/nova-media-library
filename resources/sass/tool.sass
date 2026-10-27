@@ -20,6 +20,21 @@
       display: none
 
 
+// Nova's prebuilt CSS lacks left-3 / top-1/2 / -translate-y-1/2 / pl-9
+.nml-search
+  position: relative
+  .nml-search-icon
+    position: absolute
+    left: 0.75rem
+    top: 50%
+    transform: translateY(-50%)
+    width: 1.25rem
+    height: 1.25rem
+    pointer-events: none
+  input
+    padding-left: 2.5rem
+
+
 .nml-close
   font-size: 32px
   font-weight: 100
