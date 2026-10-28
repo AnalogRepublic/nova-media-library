@@ -106,6 +106,17 @@ export default {
         })
     },
 
+    loadFolders() {
+      if ('folders' !== this.config.store) return
+      // assign through the reactive config so the folder tiles render when the response arrives late
+      Nova.request()
+        .get('/nova-vendor/nova-media-library/folders')
+        .then(r => {
+          this.config.folders = r.data
+        })
+        .catch(() => {})
+    },
+
     deleteFiles(ids) {
       if (!ids.length || !confirm(this.__('Delete selected files?'))) return
       this.loading = true
@@ -155,6 +166,7 @@ export default {
     if ('onmousewheel' in document) wheel = 'mousewheel'
     this.oldFilter = { ...this.filter }
     this.get()
+    this.loadFolders()
 
     if (!this.field && wheel) document.addEventListener(wheel, this.scroller)
   },
